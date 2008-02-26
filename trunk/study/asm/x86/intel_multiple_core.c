@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <sys/epoll.h>
 
 int main() {
-	return 0;	
+
+	return 0;
 }
 
