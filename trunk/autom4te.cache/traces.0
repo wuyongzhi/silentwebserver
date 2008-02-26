@@ -630,7 +630,7 @@ m4trace:configure.ac:3: -1- AM_CONDITIONAL([am__fastdepCC], [
   && test "$am_cv_CC_dependencies_compiler_type" = gcc3])
 m4trace:configure.ac:3: -1- m4_pattern_allow([^am__fastdepCC_TRUE$])
 m4trace:configure.ac:3: -1- m4_pattern_allow([^am__fastdepCC_FALSE$])
-m4trace:configure.ac:19: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.ac:19: -1- m4_pattern_allow([^LTLIBOBJS$])
-m4trace:configure.ac:19: -1- _AC_AM_CONFIG_HEADER_HOOK([$ac_file])
-m4trace:configure.ac:19: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
+m4trace:configure.ac:21: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:21: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:21: -1- _AC_AM_CONFIG_HEADER_HOOK([$ac_file])
+m4trace:configure.ac:21: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS

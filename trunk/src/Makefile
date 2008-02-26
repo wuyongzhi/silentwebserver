@@ -49,7 +49,7 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_silent_OBJECTS = silent-silent.$(OBJEXT) silent-mempool.$(OBJEXT)
+am_silent_OBJECTS = silent.$(OBJEXT) mempool.$(OBJEXT)
 silent_OBJECTS = $(am_silent_OBJECTS)
 silent_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -75,7 +75,7 @@ AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = 
 CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
@@ -144,7 +144,6 @@ silent_SOURCES = silent.c \
 				 mempool.c
 
 noinst_HEADERS = mempool.h
-silent_CFLAGS = -g -ggdb -O0
 all: all-am
 
 .SUFFIXES:
@@ -211,8 +210,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/silent-mempool.Po
-include ./$(DEPDIR)/silent-silent.Po
+include ./$(DEPDIR)/mempool.Po
+include ./$(DEPDIR)/silent.Po
 
 .c.o:
 	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -227,34 +226,6 @@ include ./$(DEPDIR)/silent-silent.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(COMPILE) -c `$(CYGPATH_W) '$<'`
-
-silent-silent.o: silent.c
-	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -MT silent-silent.o -MD -MP -MF "$(DEPDIR)/silent-silent.Tpo" -c -o silent-silent.o `test -f 'silent.c' || echo '$(srcdir)/'`silent.c; \
-	then mv -f "$(DEPDIR)/silent-silent.Tpo" "$(DEPDIR)/silent-silent.Po"; else rm -f "$(DEPDIR)/silent-silent.Tpo"; exit 1; fi
-#	source='silent.c' object='silent-silent.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -c -o silent-silent.o `test -f 'silent.c' || echo '$(srcdir)/'`silent.c
-
-silent-silent.obj: silent.c
-	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -MT silent-silent.obj -MD -MP -MF "$(DEPDIR)/silent-silent.Tpo" -c -o silent-silent.obj `if test -f 'silent.c'; then $(CYGPATH_W) 'silent.c'; else $(CYGPATH_W) '$(srcdir)/silent.c'; fi`; \
-	then mv -f "$(DEPDIR)/silent-silent.Tpo" "$(DEPDIR)/silent-silent.Po"; else rm -f "$(DEPDIR)/silent-silent.Tpo"; exit 1; fi
-#	source='silent.c' object='silent-silent.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -c -o silent-silent.obj `if test -f 'silent.c'; then $(CYGPATH_W) 'silent.c'; else $(CYGPATH_W) '$(srcdir)/silent.c'; fi`
-
-silent-mempool.o: mempool.c
-	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -MT silent-mempool.o -MD -MP -MF "$(DEPDIR)/silent-mempool.Tpo" -c -o silent-mempool.o `test -f 'mempool.c' || echo '$(srcdir)/'`mempool.c; \
-	then mv -f "$(DEPDIR)/silent-mempool.Tpo" "$(DEPDIR)/silent-mempool.Po"; else rm -f "$(DEPDIR)/silent-mempool.Tpo"; exit 1; fi
-#	source='mempool.c' object='silent-mempool.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -c -o silent-mempool.o `test -f 'mempool.c' || echo '$(srcdir)/'`mempool.c
-
-silent-mempool.obj: mempool.c
-	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -MT silent-mempool.obj -MD -MP -MF "$(DEPDIR)/silent-mempool.Tpo" -c -o silent-mempool.obj `if test -f 'mempool.c'; then $(CYGPATH_W) 'mempool.c'; else $(CYGPATH_W) '$(srcdir)/mempool.c'; fi`; \
-	then mv -f "$(DEPDIR)/silent-mempool.Tpo" "$(DEPDIR)/silent-mempool.Po"; else rm -f "$(DEPDIR)/silent-mempool.Tpo"; exit 1; fi
-#	source='mempool.c' object='silent-mempool.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(silent_CFLAGS) $(CFLAGS) -c -o silent-mempool.obj `if test -f 'mempool.c'; then $(CYGPATH_W) 'mempool.c'; else $(CYGPATH_W) '$(srcdir)/mempool.c'; fi`
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
@@ -423,6 +394,8 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS uninstall-info-am
 
+
+#silent_CFLAGS=-g -ggdb -O0
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

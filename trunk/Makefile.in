@@ -154,6 +154,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+AM_CFLAGS = -g -ggdb -O0
 SUBDIRS = src study
 dist_doc_DATA = README
 all: config.h

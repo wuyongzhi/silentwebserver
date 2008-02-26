@@ -1,6 +1,8 @@
 AC_INIT([silent], [1.0], [srdrm.cn@gmail.com])
 	AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 	AC_PROG_CC
+
+	AM_CFLAGS=-g -ggdb -O0
 	AC_CONFIG_HEADERS([config.h])
 	AC_CONFIG_FILES([
 			Makefile
