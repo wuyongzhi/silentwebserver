@@ -129,7 +129,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-SUBDIRS = asm epoll lang linux_aio
+SUBDIRS = asm epoll
 all: all-recursive
 
 .SUFFIXES:

@@ -86,14 +86,14 @@ OBJEXT = o
 PACKAGE = silent
 PACKAGE_BUGREPORT = srdrm.cn@gmail.com
 PACKAGE_NAME = silent
-PACKAGE_STRING = silent 1.0 alpha
+PACKAGE_STRING = silent 1.0
 PACKAGE_TARNAME = silent
-PACKAGE_VERSION = 1.0 alpha
+PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = 
-VERSION = 1.0 alpha
+VERSION = 1.0
 ac_ct_CC = gcc
 am__fastdepCC_FALSE = #
 am__fastdepCC_TRUE = 
@@ -129,7 +129,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-SUBDIRS = asm epoll lang linux_aio
+SUBDIRS = asm epoll
 all: all-recursive
 
 .SUFFIXES:

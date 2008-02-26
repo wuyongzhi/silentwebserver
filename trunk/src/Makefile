@@ -14,6 +14,7 @@
 
 
 
+
 srcdir = .
 top_srcdir = ..
 
@@ -36,7 +37,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 bin_PROGRAMS = silent$(EXEEXT)
 subdir = src
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -59,6 +61,7 @@ CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(silent_SOURCES)
 DIST_SOURCES = $(silent_SOURCES)
+HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -94,14 +97,14 @@ OBJEXT = o
 PACKAGE = silent
 PACKAGE_BUGREPORT = srdrm.cn@gmail.com
 PACKAGE_NAME = silent
-PACKAGE_STRING = silent 1.0 alpha
+PACKAGE_STRING = silent 1.0
 PACKAGE_TARNAME = silent
-PACKAGE_VERSION = 1.0 alpha
+PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = 
-VERSION = 1.0 alpha
+VERSION = 1.0
 ac_ct_CC = gcc
 am__fastdepCC_FALSE = #
 am__fastdepCC_TRUE = 
@@ -140,6 +143,7 @@ target_alias =
 silent_SOURCES = silent.c \
 				 mempool.c
 
+noinst_HEADERS = mempool.h
 silent_CFLAGS = -g -ggdb -O0
 all: all-am
 
@@ -330,7 +334,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS)
+all-am: Makefile $(PROGRAMS) $(HEADERS)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
