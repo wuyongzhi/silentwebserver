@@ -75,7 +75,7 @@ AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = 
+CFLAGS = -g3 -ggdb -O0
 CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
@@ -394,8 +394,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS uninstall-info-am
 
-
-#silent_CFLAGS=-g -ggdb -O0
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

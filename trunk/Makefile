@@ -89,7 +89,7 @@ AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = 
+CFLAGS = -g3 -ggdb -O0
 CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
@@ -154,7 +154,6 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-AM_CFLAGS = -g -ggdb -O0
 SUBDIRS = src study
 dist_doc_DATA = README
 all: config.h

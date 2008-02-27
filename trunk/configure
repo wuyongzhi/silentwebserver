@@ -3238,7 +3238,8 @@ fi
 
 
 
-	AM_CFLAGS=-g -ggdb -O0
+	CFLAGS="-g3 -ggdb -O0"
+
 	ac_config_headers="$ac_config_headers config.h"
 
 	ac_config_files="$ac_config_files Makefile src/Makefile study/Makefile study/asm/Makefile study/asm/x86/Makefile study/epoll/Makefile"
