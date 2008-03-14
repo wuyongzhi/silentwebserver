@@ -1,13 +1,13 @@
 #ifndef _SILENT_SERVER_H_
 #define _SILENT_SERVER_H_
 
+#include <stdint.h>
 
-typedef unsigned short u_short;
-typedef unsigned int u_int;
+
 
 typedef struct _server_config_t {
-	u_short port;
-	u_int address;
+	uint16_t  port;
+	uint32_t  address;
 }server_config_t;
 
 
