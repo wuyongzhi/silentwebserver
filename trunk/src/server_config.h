@@ -10,6 +10,7 @@
 struct server_config {
 	uint16_t port;
 	uint32_t address;
+	int backlog;
 };
 
 
