@@ -553,11 +553,11 @@ s,@am__leading_dot@,|#_!!_#|.,g
 s,@AMTAR@,|#_!!_#|${SHELL} /home/wyz/silent_trunk/missing --run tar,g
 s,@am__tar@,|#_!!_#|${AMTAR} chof - "$$tardir",g
 s,@am__untar@,|#_!!_#|${AMTAR} xf -,g
-s,@CC@,|#_!!_#|gcc,g
-s,@CFLAGS@,|#_!!_#|-g -O2,g
+s,@CXX@,|#_!!_#|g++,g
+s,@CXXFLAGS@,|#_!!_#|-g3 -ggdb -O0,g
 s,@LDFLAGS@,|#_!!_#|,g
-s,@CPPFLAGS@,|#_!!_#|-g3 -ggdb -O0,g
-s,@ac_ct_CC@,|#_!!_#|gcc,g
+s,@CPPFLAGS@,|#_!!_#|,g
+s,@ac_ct_CXX@,|#_!!_#|g++,g
 s,@EXEEXT@,|#_!!_#|,g
 s,@OBJEXT@,|#_!!_#|o,g
 s,@DEPDIR@,|#_!!_#|.deps,g
@@ -566,12 +566,6 @@ s,@am__quote@,|#_!!_#|,g
 s,@AMDEP_TRUE@,|#_!!_#|,g
 s,@AMDEP_FALSE@,|#_!!_#|#,g
 s,@AMDEPBACKSLASH@,|#_!!_#|\\,g
-s,@CCDEPMODE@,|#_!!_#|depmode=gcc3,g
-s,@am__fastdepCC_TRUE@,|#_!!_#|,g
-s,@am__fastdepCC_FALSE@,|#_!!_#|#,g
-s,@CXX@,|#_!!_#|g++,g
-s,@CXXFLAGS@,|#_!!_#|-g -O2,g
-s,@ac_ct_CXX@,|#_!!_#|g++,g
 s,@CXXDEPMODE@,|#_!!_#|depmode=gcc3,g
 s,@am__fastdepCXX_TRUE@,|#_!!_#|,g
 s,@am__fastdepCXX_FALSE@,|#_!!_#|#,g
