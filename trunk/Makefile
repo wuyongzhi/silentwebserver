@@ -89,8 +89,11 @@ AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g3 -ggdb -O0
-CPPFLAGS = 
+CFLAGS = -g -O2
+CPPFLAGS = -g3 -ggdb -O0
+CXX = g++
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -120,8 +123,11 @@ SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
 ac_ct_CC = gcc
+ac_ct_CXX = g++
 am__fastdepCC_FALSE = #
 am__fastdepCC_TRUE = 
+am__fastdepCXX_FALSE = #
+am__fastdepCXX_TRUE = 
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -154,7 +160,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-SUBDIRS = src study
+SUBDIRS = src 
 dist_doc_DATA = README
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive

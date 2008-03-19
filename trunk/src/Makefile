@@ -55,10 +55,11 @@ silent_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
 SOURCES = $(silent_SOURCES)
 DIST_SOURCES = $(silent_SOURCES)
 HEADERS = $(noinst_HEADERS)
@@ -75,8 +76,11 @@ AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g3 -ggdb -O0
-CPPFLAGS = 
+CFLAGS = -g -O2
+CPPFLAGS = -g3 -ggdb -O0
+CXX = g++
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -106,8 +110,11 @@ SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
 ac_ct_CC = gcc
+ac_ct_CXX = g++
 am__fastdepCC_FALSE = #
 am__fastdepCC_TRUE = 
+am__fastdepCXX_FALSE = #
+am__fastdepCXX_TRUE = 
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -140,14 +147,12 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-silent_SOURCES = silent.c \
-				 mempool.c
-
-noinst_HEADERS = mempool.h
+silent_SOURCES = silent.cpp mempool.cpp
+noinst_HEADERS = mempool.h vhost.h server.h
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .o .obj
+.SUFFIXES: .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -202,7 +207,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 silent$(EXEEXT): $(silent_OBJECTS) $(silent_DEPENDENCIES) 
 	@rm -f silent$(EXEEXT)
-	$(LINK) $(silent_LDFLAGS) $(silent_OBJECTS) $(silent_LDADD) $(LIBS)
+	$(CXXLINK) $(silent_LDFLAGS) $(silent_OBJECTS) $(silent_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -213,19 +218,19 @@ distclean-compile:
 include ./$(DEPDIR)/mempool.Po
 include ./$(DEPDIR)/silent.Po
 
-.c.o:
-	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+.cpp.o:
+	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
 	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
 #	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(COMPILE) -c $<
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ $<
 
-.c.obj:
-	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+.cpp.obj:
+	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
 	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
 #	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)

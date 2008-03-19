@@ -66,6 +66,9 @@ CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g3 -ggdb -O0
 CPPFLAGS = 
+CXX = g++
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -95,8 +98,11 @@ SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
 ac_ct_CC = gcc
+ac_ct_CXX = g++
 am__fastdepCC_FALSE = #
 am__fastdepCC_TRUE = 
+am__fastdepCXX_FALSE = #
+am__fastdepCXX_TRUE = 
 am__include = include
 am__leading_dot = .
 am__quote = 

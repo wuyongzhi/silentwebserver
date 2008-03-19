@@ -8,6 +8,7 @@
 typedef struct _server_config_t {
 	uint16_t  port;
 	uint32_t  address;
+
 }server_config_t;
 
 

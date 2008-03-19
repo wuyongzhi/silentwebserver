@@ -62,10 +62,10 @@ AUTOCONF = ${SHELL} /home/wyz/silent_trunk/missing --run autoconf
 AUTOHEADER = ${SHELL} /home/wyz/silent_trunk/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
 AWK = mawk
-CC = gcc
-CCDEPMODE = depmode=gcc3
-CFLAGS = -g3 -ggdb -O0
-CPPFLAGS = 
+CPPFLAGS = -g3 -ggdb -O0
+CXX = g++
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -94,9 +94,9 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1.0
-ac_ct_CC = gcc
-am__fastdepCC_FALSE = #
-am__fastdepCC_TRUE = 
+ac_ct_CXX = g++
+am__fastdepCXX_FALSE = #
+am__fastdepCXX_TRUE = 
 am__include = include
 am__leading_dot = .
 am__quote = 

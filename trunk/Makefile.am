@@ -1,2 +1,2 @@
-SUBDIRS = src study
-dist_doc_DATA = README
+SUBDIRS=src 
+dist_doc_DATA=README
