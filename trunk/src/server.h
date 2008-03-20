@@ -12,9 +12,9 @@
  *
  */
 
-class server {
+struct server {
+	
 	int listener_socket;
-	sockaddr_in socket_address;
 	
 	
 };
