@@ -49,7 +49,8 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_silent_OBJECTS = mempool.$(OBJEXT) server.$(OBJEXT)
+am_silent_OBJECTS = mempool.$(OBJEXT) server.$(OBJEXT) \
+	socket_control.$(OBJEXT)
 silent_OBJECTS = $(am_silent_OBJECTS)
 silent_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -141,7 +142,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-silent_SOURCES = mempool.cpp server.cpp 
+silent_SOURCES = mempool.cpp server.cpp socket_control.cpp
 noinst_HEADERS = mempool.h vhost.h server.h server_config.h
 all: all-am
 
@@ -211,6 +212,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/mempool.Po
 include ./$(DEPDIR)/server.Po
+include ./$(DEPDIR)/socket_control.Po
 
 .cpp.o:
 	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \

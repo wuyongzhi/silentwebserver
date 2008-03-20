@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <config.h>
 
+#include <fcntl.h>
+
 #include "mempool.h"
 #include "server.h"
 #include "server_config.h"
+#include "socket_control.h"
+
 
 
 int main() {
@@ -42,8 +46,11 @@ int create_listener(server_config& config) {
 	return listener;
 }
 
-int config_listen_socket(int sockfd) {
+int config_listen_socket(int sockfd, server_config &config) {
+	set_nonblock(sockfd);
+	
 	
 }
+
 
 
