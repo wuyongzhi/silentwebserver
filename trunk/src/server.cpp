@@ -9,7 +9,6 @@
 #include "server_config.h"
 #include "socket_control.h"
 
-
 int config_listening_socket(int sockfd, server_config &config);
 int mainloop (server& srv, server_config& cfg);
 int create_listener(server_config& cfg);
@@ -36,7 +35,7 @@ int main() {
 	return 0;
 }
 
-
+ 
 
 int create_listener(server_config& config) {
 	int error;
@@ -44,12 +43,6 @@ int create_listener(server_config& config) {
 	if (listener < 0) {
 		puts ("socket create failed");
 		return listener;
-	}
-
-	error = config_listening_socket(listener, config);
-	if (error < 0) {
-		puts ("Can NOT configure listening socket");
-		return error;
 	}
 
 	sockaddr_in addr = {0};
@@ -66,16 +59,21 @@ int create_listener(server_config& config) {
 		printf ("Can NOT listen socket. backlog=%d \n", config.backlog);
 		return error;
 	}
-	
-	
+
+	error = config_listening_socket(listener, config);
+	if (error < 0) {
+		puts ("Can NOT configure listening socket");
+		return error;
+	}
+
 	return listener;
 }
+
 
 int config_listening_socket(int sockfd, server_config& config) {
 	int result = set_nonblock(sockfd);
 	return result;
 }
-
 
 
 

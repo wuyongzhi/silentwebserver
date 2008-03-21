@@ -15,6 +15,7 @@
 struct server {
 	
 	int listener_socket;
+	int epoll;
 	
 	
 };
