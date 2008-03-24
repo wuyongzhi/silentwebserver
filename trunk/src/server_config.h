@@ -16,8 +16,5 @@ struct server_config {
 
 
 
-
-
-
 #endif
 
