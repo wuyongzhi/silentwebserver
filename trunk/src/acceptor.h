@@ -3,7 +3,7 @@
 
 
 #include <stdint.h>
-#include 
+ 
 
 template<class Implement, class Handler>
 class Acceptor {
@@ -19,8 +19,8 @@ public:
 	*	address, port both are host byte order.
 	*	
 	*/
-	bool bind(uint32_t address, uint16_t port) {
-		return implement.bind(address, port);
+	bool bind(uint32_t ip_address, uint16_t port) {
+		return implement.bind(ip_address, port);
 	}
 	
 	/**
