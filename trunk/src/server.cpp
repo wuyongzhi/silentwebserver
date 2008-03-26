@@ -8,6 +8,8 @@
 #include "server.h"
 #include "server_config.h"
 #include "socket_control.h"
+#include "acceptor.h"
+
 
 int config_listening_socket(int sockfd, server_config &config);
 int mainloop (server& srv, server_config& cfg);
@@ -16,19 +18,30 @@ int create_listener(server_config& cfg);
 static server_config g_config;
 static server g_server;
 
+class HttpConnection {
+
+};
+
+class HttpHandler {
+	
+};
+
+
+
 int main() {
 	
 	g_config.port = 8080;
 	g_config.address = 0;
 	g_config.backlog = 128;
 	
-	g_server.listener_socket = create_listener(g_config);
-	
-	if (g_server.listener_socket < 0 ) {
-		return 1;
-	} else {
+	HttpHandler handler;
+
+	Acceptor<HttpConnection, HttpHandler> acceptor(handler);
+
+	if (acceptor.bind(g_config.address,g_config.port)) {
 		printf ("%s is running at %d port\n", PACKAGE_STRING, g_config.port);
 	}
+
 
 	mainloop(g_server, g_config);
 
@@ -71,7 +84,7 @@ int create_listener(server_config& config) {
 
 
 int config_listening_socket(int sockfd, server_config& config) {
-	int result = set_nonblock(sockfd);
+	int result = set_nonblocking(sockfd);
 	return result;
 }
 

@@ -142,8 +142,8 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-silent_SOURCES = mempool.cpp server.cpp socket_control.cpp
-noinst_HEADERS = mempool.h vhost.h server.h server_config.h
+silent_SOURCES = mempool.cpp server.cpp socket_control.cpp 
+noinst_HEADERS = mempool.h vhost.h server.h server_config.h acceptor.h connection.h 
 all: all-am
 
 .SUFFIXES:

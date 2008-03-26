@@ -4,7 +4,7 @@
 
 
 
-int set_nonblock(int fd) {
+int set_nonblocking(int fd) {
 	int currentFlag = fcntl(fd, F_GETFL);
 	currentFlag |= O_NONBLOCK;
 	return fcntl (fd, F_SETFL, currentFlag);

@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-int set_nonblock(int sockfd);
+int set_nonblocking(int sockfd);
 int get_sendbuffer_size(int sockfd);
 int get_recvbuffer_size(int sockfd);
 int set_sendbuffer_size(int sockfd, int size);
