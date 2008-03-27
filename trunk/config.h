@@ -2,19 +2,19 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Name of package */
-#define PACKAGE "silent"
+#define PACKAGE "xiongfeng-server"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "srdrm.cn@gmail.com"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "silent"
+#define PACKAGE_NAME "XiongFeng Server"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "silent 1.0"
+#define PACKAGE_STRING "XiongFeng Server 1.0"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "silent"
+#define PACKAGE_TARNAME "xiongfeng-server"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.0"

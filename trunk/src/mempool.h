@@ -1,5 +1,5 @@
-#ifndef _SILENT_MEM_POOL_H_
-#define _SILENT_MEM_POOL_H_
+#ifndef _XF_MEM_POOL_H_
+#define _XF_MEM_POOL_H_
 
 #include <stdlib.h>
 

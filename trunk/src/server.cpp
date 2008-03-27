@@ -9,7 +9,10 @@
 #include "server_config.h"
 #include "socket_control.h"
 #include "acceptor.h"
+#include "http_connection.h"
+#include "http_handler.h"
 
+using namespace xf;
 
 int config_listening_socket(int sockfd, server_config &config);
 int mainloop (server& srv, server_config& cfg);
@@ -18,13 +21,6 @@ int create_listener(server_config& cfg);
 static server_config g_config;
 static server g_server;
 
-class HttpConnection {
-
-};
-
-class HttpHandler {
-	
-};
 
 
 
@@ -34,9 +30,9 @@ int main() {
 	g_config.address = 0;
 	g_config.backlog = 128;
 	
-	HttpHandler handler;
+	Handler<HttpConnection> handler;
 
-	Acceptor<HttpConnection, HttpHandler> acceptor(handler);
+	Acceptor<HttpConnection, Handler<HttpConnection> > acceptor(handler);
 
 	if (acceptor.bind(g_config.address,g_config.port)) {
 		printf ("%s is running at %d port\n", PACKAGE_STRING, g_config.port);

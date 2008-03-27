@@ -1,5 +1,5 @@
-#ifndef _SILENT_VHOST_H_
-#define _SILENT_VHOST_H_
+#ifndef _XF_VHOST_H_
+#define _XF_VHOST_H_
 
 
 typedef struct _vhost_t {

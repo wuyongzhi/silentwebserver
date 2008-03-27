@@ -1,5 +1,5 @@
-#ifndef _SILENT_ACCEPTOR_H_
-#define _SILENT_ACCEPTOR_H_
+#ifndef _XF_ACCEPTOR_H_
+#define _XF_ACCEPTOR_H_
 
 
 #include <stdint.h>
@@ -13,27 +13,19 @@
 
 
 #include "socket_control.h"
-
-/*
-template<class ConnectionClass>
-class ConnectionHandler {
-public:
-	void created(ConnectionClass conn);
-void received(ConnectionClass conn);
-	void sent(ConnectionClass conn);
-	void closed(ConnectionClass conn);
-};
-*/
+#include "handler.h"
 
 
-template<class _ConnectionType, class _HandlerType>
+namespace xf {
+
+template<class _ConnectionType, class _HandlerType=Handler<_ConnectionType> >
 class Acceptor {
 	typedef  _ConnectionType ConnectionType;
 	typedef  _HandlerType HandlerType;
 
 private:
 	HandlerType handler;
-
+	
 public:
 	Acceptor(_HandlerType _handler): handler(_handler) {
 	}
@@ -103,7 +95,7 @@ protected:
 };
 
 
-
+}	// namespace xf;
 
 #endif
 

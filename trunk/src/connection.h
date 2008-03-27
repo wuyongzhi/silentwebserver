@@ -1,31 +1,41 @@
-#ifndef _SILENT_CONNECTION_H_
-#define _SILENT_CONNECTION_H_	1
+#ifndef _XF_CONNECTION_H_
+#define _XF_CONNECTION_H_	1
+
+
+
+
+namespace xf {
 
 
 /**
- *	Connection 类所有成员均是 protected 意思是不能直接进行使用的.
- *	包括不能直接创建, 直接删除. 而只能
+ *	Connection 类
  *
  */
-template<typename UserData>
 class Connection {
+	
+private: 
+	int fd;				//sock 描述符
+	int write_queue;	//数据输出队列..
+	
+	 
+	
+	
 protected:
+	
 	Connection() {
 	}
 	~Connection() {
 	}
 	
-	int fd;				//sock 描述符
-	int write_queue;	//数据输出队列..
+	
+template<class,class> friend class Acceptor;
 	
 	
-
-	UserData userdata;
-
 };
 
 
+} // namespace xf;
 
 
-#endif
+#endif	// _XF_CONNECTION_H_
 

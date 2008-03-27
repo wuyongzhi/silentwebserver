@@ -17,9 +17,9 @@
 srcdir = .
 top_srcdir = .
 
-pkgdatadir = $(datadir)/silent
-pkglibdir = $(libdir)/silent
-pkgincludedir = $(includedir)/silent
+pkgdatadir = $(datadir)/xiongfeng-server
+pkglibdir = $(libdir)/xiongfeng-server
+pkgincludedir = $(includedir)/xiongfeng-server
 top_builddir = .
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -108,11 +108,11 @@ LIBS =
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /home/wyz/silent_trunk/missing --run makeinfo
 OBJEXT = o
-PACKAGE = silent
+PACKAGE = xiongfeng-server
 PACKAGE_BUGREPORT = srdrm.cn@gmail.com
-PACKAGE_NAME = silent
-PACKAGE_STRING = silent 1.0
-PACKAGE_TARNAME = silent
+PACKAGE_NAME = XiongFeng Server
+PACKAGE_STRING = XiongFeng Server 1.0
+PACKAGE_TARNAME = xiongfeng-server
 PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
