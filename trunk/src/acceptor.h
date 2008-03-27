@@ -120,8 +120,8 @@ private:
 	
 	bool epoll_init() {
 		epoll_fd = epoll_create(epoll_size);
-		if (epoll_fd >= 0) {
-			epoll_fd
+		if (isValidHandle(epoll_fd)) {
+			
 		}
 	}
 	
