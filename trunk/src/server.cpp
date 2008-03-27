@@ -34,7 +34,7 @@ int main() {
 
 	Acceptor<HttpConnection, Handler<HttpConnection> > acceptor(handler);
 
-	if (acceptor.bind(g_config.address,g_config.port)) {
+	if (acceptor.start(g_config.address,g_config.port)) {
 		printf ("%s is running at %d port\n", PACKAGE_STRING, g_config.port);
 	}
 

@@ -10,8 +10,6 @@
 
 #include <config.h>
 
-
-
 #include "socket_control.h"
 #include "handler.h"
 
@@ -20,23 +18,77 @@ namespace xf {
 
 template<class _ConnectionType, class _HandlerType=Handler<_ConnectionType> >
 class Acceptor {
-	typedef  _ConnectionType ConnectionType;
-	typedef  _HandlerType HandlerType;
+	typedef  _ConnectionType	ConnectionType;
+	typedef  _HandlerType		HandlerType;
 
-private:
-	HandlerType handler;
-	
 public:
-	Acceptor(_HandlerType _handler): handler(_handler) {
+	Acceptor(HandlerType& _handler)
+		: handler(_handler),epoll_fd(0),listener(0),epoll_size(1024) {
 	}
 	
-	/**	
-	*	address, port both are host byte order.
-	*	
-	*/
-	bool bind(uint32_t address, uint16_t port, int backlog=128) {
+	~Acceptor() {
+		destroy();
+	}
+	
+	// both are host byte order.
+	bool start(uint32_t address, uint16_t port, int backlog=128) {
+		if (listener > 0)	//already bind
+			return false;
+
+		bool result = bind_internal(address, port, backlog);
+		if (!result) {
+			close_FDs();
+		}
+		return result;
+	}
+	
+
+	HandlerType setHandler(HandlerType& handler) {
+		this->handler = handler;
+	}
+
+	int getEpollSize() {
+		return this->epoll_size;
+	}
+
+	bool setEpollSize(int size) {
+		
+	}
+
+protected:
+
+	void mainloop() {
+
+	}
+
+private:
+	HandlerType& handler;
+
+	handle_t epoll_fd;	
+	socket_t listener;	
+
+	int epoll_size;	// first parameter of epoll_create function
+
+	
+	bool isBinding() {
+		return isValidSocket(listener);
+	}
+	bool isEpollCreated() {
+		return isValidHandle(epoll_fd);
+	}
+	
+	void close_FDs () {
+		if (isValidSocket(listener)) {
+			close(listener);listener = 0;
+		}
+		if (epoll_fd > 0) {
+			close(epoll_fd); epoll_fd = 0;
+		}
+	}
+
+	bool bind_internal(uint32_t address, uint16_t port, int backlog=128) {
 		int error;
-		int listener = ::socket(AF_INET, SOCK_STREAM, 0);
+		listener = ::socket(AF_INET, SOCK_STREAM, 0);
 		if (listener < 0) {
 			puts ("socket create failed");
 			return false;
@@ -66,32 +118,21 @@ public:
 		return true;
 	}
 	
-	HandlerType setHandler(HandlerType handler) {
-		this->handler = handler;
+	bool epoll_init() {
+		epoll_fd = epoll_create(epoll_size);
+		if (epoll_fd >= 0) {
+			epoll_fd
+		}
 	}
 	
-/*	int start() {
-
-	}
-
 	
-	bool suspend() {
+
+	void destroy() {
+		close_FDs();
 	}
 
-	bool resume() {
 
-	}
 
-	bool stop() {
-
-	}
-*/
-
-protected:
-
-	void mainloop() {
-
-	}
 };
 
 
