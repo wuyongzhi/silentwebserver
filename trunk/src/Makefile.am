@@ -6,4 +6,5 @@ noinst_HEADERS=
 	mempool.h vhost.h server.h server_config.h 
 	acceptor.h connection.h handler.h
 	http_connection.h http_handler.h
+	io.h os.h io_win32.h io_linux_sys_epoll.h
 

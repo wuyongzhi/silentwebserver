@@ -2,7 +2,7 @@
 #define _XF_OS_H_	1
 
 namespace xf {
-#ifdef WIN32 
+#ifdef _WIN32	//win32 系统
 
 	typedef HANDLE handle_t;
 	typedef SOCKET socket_t;
@@ -21,7 +21,8 @@ namespace xf {
 	}
 
 
-#else
+#else	// 非win32系统, linux/unix 等
+
 	typedef int handle_t;
 	typedef int socket_t;
 
@@ -41,7 +42,7 @@ namespace xf {
 	const int INVALID_SOCKET = -1;
 	const int INVALID_HANDLE = -1;
 
-#endif
+#endif //_WIN32
 	
 
 

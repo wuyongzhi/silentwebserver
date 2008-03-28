@@ -8,14 +8,14 @@ namespace xf {
 
 
 /**
- *	Connection ç±»
+ *	Connection Àà
  *
  */
 class Connection {
 	
 private: 
-	int fd;				//sock æè¿°ç¬¦
-	int write_queue;	//æ•°æ®è¾“å‡ºé˜Ÿåˆ—..
+	int fd;				//sock ÃèÊö·û
+	int write_queue;	//Êı¾İÊä³ö¶ÓÁĞ..
 	
 	 
 	
@@ -28,7 +28,7 @@ protected:
 	}
 	
 	
-template<class,class> friend class Acceptor;	//acceptor å¯è®¿é—® connection çš„æ‰€æœ‰æˆå‘˜
+template<class,class> friend class Acceptor;	//acceptor ¿É·ÃÎÊ connection µÄËùÓĞ³ÉÔ±
 	
 	
 };

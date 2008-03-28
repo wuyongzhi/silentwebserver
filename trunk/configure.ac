@@ -3,8 +3,9 @@
 	
 
 	AC_PROG_CXX
-
 	CXXFLAGS="-g3 -ggdb -O0"
+
+	AC_CHECK_HEADERS([sys/epoll.h])
 
 	AC_CONFIG_HEADERS([config.h])
 	AC_CONFIG_FILES([

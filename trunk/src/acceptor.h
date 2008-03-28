@@ -8,10 +8,13 @@
 #include <fcntl.h>
 #include <sys/socket.h>
 
+
 #include <config.h>
 
 #include "socket_control.h"
 #include "handler.h"
+#include "os.h"
+#include "io.h"
 
 
 namespace xf {
@@ -119,10 +122,15 @@ private:
 	}
 	
 	bool epoll_init() {
+		if (isEpollCreated())
+			return true;
+		
 		epoll_fd = epoll_create(epoll_size);
 		if (isValidHandle(epoll_fd)) {
 			
 		}
+
+		return true;
 	}
 	
 	
