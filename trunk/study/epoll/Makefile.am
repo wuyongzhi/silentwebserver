@@ -1,2 +1,4 @@
-bin_PROGRAMS = test_epoll
-test_epoll_SOURCES=server.c
+bin_PROGRAMS = test_epoll wait_after_read pollrdhup
+test_epoll_SOURCES=test_epoll.c
+wait_after_read_SOURCES=wait_after_read.cpp
+pollrdhup_SOURCES=pollrdhup-test.c

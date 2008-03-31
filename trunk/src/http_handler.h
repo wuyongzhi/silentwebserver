@@ -1,10 +1,10 @@
-#ifndef _XF_HTTP_HANDLER_H_
-#define _XF_HTTP_HANDLER_H_		1
+#ifndef _SILENT_HTTP_HANDLER_H_
+#define _SILENT_HTTP_HANDLER_H_		1
 
 #include "http_connection.h"
 #include "handler.h"
 
-namespace xf {
+namespace silent {
 
 template<>
 class Handler<HttpConnection> {

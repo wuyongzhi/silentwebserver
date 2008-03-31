@@ -1,9 +1,9 @@
-#ifndef _XF_HTTP_CONNECTION_H_
-#define _XF_HTTP_CONNECTION_H_	1
+#ifndef _SILENT_HTTP_CONNECTION_H_
+#define _SILENT_HTTP_CONNECTION_H_	1
 
 #include "connection.h"
 
-namespace xf {
+namespace silent {
 
 
 class HttpConnection : public Connection {

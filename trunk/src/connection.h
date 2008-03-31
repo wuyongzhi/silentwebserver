@@ -1,10 +1,10 @@
-#ifndef _XF_CONNECTION_H_
-#define _XF_CONNECTION_H_	1
+#ifndef _SILENT_CONNECTION_H_
+#define _SILENT_CONNECTION_H_	1
 
 
 
 
-namespace xf {
+namespace silent {
 
 
 /**
@@ -34,8 +34,8 @@ template<class,class> friend class Acceptor;	//acceptor 可访问 connection 的所有
 };
 
 
-} // namespace xf;
+} // namespace silent;
 
 
-#endif	// _XF_CONNECTION_H_
+#endif	// _SILENT_CONNECTION_H_
 

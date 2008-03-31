@@ -1,5 +1,5 @@
-#ifndef _XF_SOCK_CONTROL_H_
-#define _XF_SOCK_CONTROL_H_
+#ifndef _SILENT_SOCK_CONTROL_H_
+#define _SILENT_SOCK_CONTROL_H_
 
 #ifndef __cplusplus
 extern "C" {

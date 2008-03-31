@@ -17,9 +17,9 @@
 srcdir = .
 top_srcdir = ../..
 
-pkgdatadir = $(datadir)/silent
-pkglibdir = $(libdir)/silent
-pkgincludedir = $(includedir)/silent
+pkgdatadir = $(datadir)/silent-server
+pkglibdir = $(libdir)/silent-server
+pkgincludedir = $(includedir)/silent-server
 top_builddir = ../..
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -34,7 +34,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = test_epoll$(EXEEXT)
+bin_PROGRAMS = test_epoll$(EXEEXT) wait_after_read$(EXEEXT) \
+	pollrdhup$(EXEEXT)
 subdir = study/epoll
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -47,9 +48,15 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_test_epoll_OBJECTS = server.$(OBJEXT)
+am_pollrdhup_OBJECTS = pollrdhup-test.$(OBJEXT)
+pollrdhup_OBJECTS = $(am_pollrdhup_OBJECTS)
+pollrdhup_LDADD = $(LDADD)
+am_test_epoll_OBJECTS = test_epoll.$(OBJEXT)
 test_epoll_OBJECTS = $(am_test_epoll_OBJECTS)
 test_epoll_LDADD = $(LDADD)
+am_wait_after_read_OBJECTS = wait_after_read.$(OBJEXT)
+wait_after_read_OBJECTS = $(am_wait_after_read_OBJECTS)
+wait_after_read_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -57,33 +64,43 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(test_epoll_SOURCES)
-DIST_SOURCES = $(test_epoll_SOURCES)
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
+SOURCES = $(pollrdhup_SOURCES) $(test_epoll_SOURCES) \
+	$(wait_after_read_SOURCES)
+DIST_SOURCES = $(pollrdhup_SOURCES) $(test_epoll_SOURCES) \
+	$(wait_after_read_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/wyz/silent_trunk/missing --run aclocal-1.9
+ACLOCAL = ${SHELL} /home/wyz/trunk/missing --run aclocal-1.9
 AMDEP_FALSE = #
 AMDEP_TRUE = 
-AMTAR = ${SHELL} /home/wyz/silent_trunk/missing --run tar
-AUTOCONF = ${SHELL} /home/wyz/silent_trunk/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/wyz/silent_trunk/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
+AMTAR = ${SHELL} /home/wyz/trunk/missing --run tar
+AUTOCONF = ${SHELL} /home/wyz/trunk/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/wyz/trunk/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/wyz/trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g3 -ggdb -O0
+CFLAGS = -g -O2
+CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -g3 -ggdb -O0
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
+EGREP = /bin/grep -E
 EXEEXT = 
+GREP = /bin/grep
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
@@ -92,13 +109,13 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/wyz/silent_trunk/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/wyz/trunk/missing --run makeinfo
 OBJEXT = o
-PACKAGE = silent
+PACKAGE = silent-server
 PACKAGE_BUGREPORT = srdrm.cn@gmail.com
-PACKAGE_NAME = silent
-PACKAGE_STRING = silent 1.0
-PACKAGE_TARNAME = silent
+PACKAGE_NAME = Silent Server
+PACKAGE_STRING = Silent Server 1.0
+PACKAGE_TARNAME = silent-server
 PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
@@ -127,7 +144,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = /home/wyz/silent_trunk/install-sh
+install_sh = /home/wyz/trunk/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -143,11 +160,13 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-test_epoll_SOURCES = server.c
+test_epoll_SOURCES = test_epoll.c
+wait_after_read_SOURCES = wait_after_read.cpp
+pollrdhup_SOURCES = pollrdhup-test.c
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .o .obj
+.SUFFIXES: .c .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -200,9 +219,15 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+pollrdhup$(EXEEXT): $(pollrdhup_OBJECTS) $(pollrdhup_DEPENDENCIES) 
+	@rm -f pollrdhup$(EXEEXT)
+	$(LINK) $(pollrdhup_LDFLAGS) $(pollrdhup_OBJECTS) $(pollrdhup_LDADD) $(LIBS)
 test_epoll$(EXEEXT): $(test_epoll_OBJECTS) $(test_epoll_DEPENDENCIES) 
 	@rm -f test_epoll$(EXEEXT)
 	$(LINK) $(test_epoll_LDFLAGS) $(test_epoll_OBJECTS) $(test_epoll_LDADD) $(LIBS)
+wait_after_read$(EXEEXT): $(wait_after_read_OBJECTS) $(wait_after_read_DEPENDENCIES) 
+	@rm -f wait_after_read$(EXEEXT)
+	$(CXXLINK) $(wait_after_read_LDFLAGS) $(wait_after_read_OBJECTS) $(wait_after_read_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -210,7 +235,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/server.Po
+include ./$(DEPDIR)/pollrdhup-test.Po
+include ./$(DEPDIR)/test_epoll.Po
+include ./$(DEPDIR)/wait_after_read.Po
 
 .c.o:
 	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -225,6 +252,20 @@ include ./$(DEPDIR)/server.Po
 #	source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+.cpp.o:
+	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)

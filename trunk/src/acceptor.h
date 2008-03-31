@@ -1,5 +1,5 @@
-#ifndef _XF_ACCEPTOR_H_
-#define _XF_ACCEPTOR_H_
+#ifndef _SILENT_ACCEPTOR_H_
+#define _SILENT_ACCEPTOR_H_
 
 
 #include <stdint.h>
@@ -17,7 +17,7 @@
 #include "io.h"
 
 
-namespace xf {
+namespace silent {
 
 template<class _ConnectionType, class _HandlerType=Handler<_ConnectionType> >
 class Acceptor {
@@ -26,7 +26,7 @@ class Acceptor {
 
 public:
 	Acceptor(HandlerType& _handler)
-		: handler(_handler),epoll_fd(0),listener(0),epoll_size(1024) {
+		: handler(_handler),epoll_fd(INVALID_HANDLE),listener(INVALID_SOCKET),epoll_size(50000) {
 	}
 	
 	~Acceptor() {
@@ -144,7 +144,7 @@ private:
 };
 
 
-}	// namespace xf;
+}	// namespace silent;
 
 #endif
 

@@ -1,7 +1,8 @@
-#ifndef _XF_OS_H_
-#define _XF_OS_H_	1
+#ifndef _SILENT_OS_H_
+#define _SILENT_OS_H_	1
 
-namespace xf {
+namespace silent {
+
 #ifdef _WIN32	//win32 ϵͳ
 
 	typedef HANDLE handle_t;

@@ -12,7 +12,7 @@
 #include "http_connection.h"
 #include "http_handler.h"
 
-using namespace xf;
+using namespace silent;
 
 int config_listening_socket(int sockfd, server_config &config);
 int mainloop (server& srv, server_config& cfg);

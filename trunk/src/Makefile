@@ -18,9 +18,9 @@
 srcdir = .
 top_srcdir = ..
 
-pkgdatadir = $(datadir)/xiongfeng-server
-pkglibdir = $(libdir)/xiongfeng-server
-pkgincludedir = $(includedir)/xiongfeng-server
+pkgdatadir = $(datadir)/silent-server
+pkglibdir = $(libdir)/silent-server
+pkgincludedir = $(includedir)/silent-server
 top_builddir = ..
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -67,13 +67,13 @@ HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/wyz/silent_trunk/missing --run aclocal-1.9
+ACLOCAL = ${SHELL} /home/wyz/trunk/missing --run aclocal-1.9
 AMDEP_FALSE = #
 AMDEP_TRUE = 
-AMTAR = ${SHELL} /home/wyz/silent_trunk/missing --run tar
-AUTOCONF = ${SHELL} /home/wyz/silent_trunk/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/wyz/silent_trunk/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/wyz/silent_trunk/missing --run automake-1.9
+AMTAR = ${SHELL} /home/wyz/trunk/missing --run tar
+AUTOCONF = ${SHELL} /home/wyz/trunk/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/wyz/trunk/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/wyz/trunk/missing --run automake-1.9
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -100,13 +100,13 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/wyz/silent_trunk/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/wyz/trunk/missing --run makeinfo
 OBJEXT = o
-PACKAGE = xiongfeng-server
+PACKAGE = silent-server
 PACKAGE_BUGREPORT = srdrm.cn@gmail.com
-PACKAGE_NAME = XiongFeng Server
-PACKAGE_STRING = XiongFeng Server 1.0
-PACKAGE_TARNAME = xiongfeng-server
+PACKAGE_NAME = Silent Server
+PACKAGE_STRING = Silent Server 1.0
+PACKAGE_TARNAME = silent-server
 PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
 SET_MAKE = 
@@ -135,7 +135,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = /home/wyz/silent_trunk/install-sh
+install_sh = /home/wyz/trunk/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -408,6 +408,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mempool.h vhost.h server.h server_config.h 
 	acceptor.h connection.h handler.h
 	http_connection.h http_handler.h
+	io.h os.h io_win32.h io_linux_sys_epoll.h
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

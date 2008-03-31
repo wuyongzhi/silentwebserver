@@ -1,8 +1,8 @@
-#ifndef _XF_HANDLER_H_
-#define _XF_HANDLER_H_	1
+#ifndef _SILENT_HANDLER_H_
+#define _SILENT_HANDLER_H_	1
 
 
-namespace xf {
+namespace silent {
 
 
 template<class _ConnectionType>

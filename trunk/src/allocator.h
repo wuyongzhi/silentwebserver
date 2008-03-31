@@ -1,10 +1,10 @@
-#ifndef _XF_ALLOCATOR_H_
-#define _XF_ALLOCATOR_H_	1
+#ifndef _SILENT_ALLOCATOR_H_
+#define _SILENT_ALLOCATOR_H_	1
 
 #include <new>	/* for placement new operator */
 
 
-namespace xf {
+namespace silent {
 
 /**
 	实现 c++ 标准规定的 allocator 相应的接口.
@@ -67,7 +67,7 @@ public:
 };
 
 
-} /* namespace xf */
+} /* namespace silent */
 
 
 
@@ -75,7 +75,7 @@ public:
 
 
 
-#endif	/* defined _XF_ALLOCATOR_H_ */
+#endif	/* defined _SILENT_ALLOCATOR_H_ */
 
 
 

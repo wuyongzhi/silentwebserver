@@ -408,6 +408,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mempool.h vhost.h server.h server_config.h 
 	acceptor.h connection.h handler.h
 	http_connection.h http_handler.h
+	io.h os.h io_win32.h io_linux_sys_epoll.h
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

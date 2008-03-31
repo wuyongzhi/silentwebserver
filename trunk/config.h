@@ -32,19 +32,19 @@
 #define HAVE_UNISTD_H 1
 
 /* Name of package */
-#define PACKAGE "xiongfeng-server"
+#define PACKAGE "silent-server"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "srdrm.cn@gmail.com"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "XiongFeng Server"
+#define PACKAGE_NAME "Silent Server"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "XiongFeng Server 1.0"
+#define PACKAGE_STRING "Silent Server 1.0"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "xiongfeng-server"
+#define PACKAGE_TARNAME "silent-server"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.0"
