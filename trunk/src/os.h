@@ -3,7 +3,10 @@
 
 namespace silent {
 
-#ifdef _WIN32	//win32 系统
+#if defined(_WIN32)		/* win32 */
+
+	#include <windows.h>
+	#include <winsock2.h>
 
 	typedef HANDLE handle_t;
 	typedef SOCKET socket_t;
@@ -20,16 +23,24 @@ namespace silent {
 	inline bool isInvalidSocket(socket_t x) {
 		return (x==INVALID_SOCKET);
 	}
+	
+	inline bool closeHandle(handle_t h) {
+		return ::CloseHandle(h) != FALSE;
+	}
 
+#elif defined(__linux__)	/* linux */
 
-#else	// 非win32系统, linux/unix 等
+	#include <unistd.h>
 
+	const int INVALID_SOCKET = -1;
+	const int INVALID_HANDLE = -1;
+	
 	typedef int handle_t;
 	typedef int socket_t;
 
 	inline bool isValidHandle(handle_t x) {
 		return x >= 0;
-	}
+	} 
 	inline bool isInvalidHandle(handle_t x) {
 		return x < 0;
 	}
@@ -40,16 +51,18 @@ namespace silent {
 		return isInvalidHandle(x);
 	}
 
-	const int INVALID_SOCKET = -1;
-	const int INVALID_HANDLE = -1;
+	inline bool closeHandle(handle_t h) {
+		return close(h)==0;
+	}
+	inline bool closeSocket(socket_t s) {
+		return close(s)==0;	
+	}
 
-#endif //_WIN32
-	
+
+#endif 
 
 
 
 }
-
-
 
 #endif

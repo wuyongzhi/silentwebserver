@@ -7,7 +7,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
 
+#include <cassert>
+#include <vector>
 
 #include <config.h>
 
@@ -16,47 +19,71 @@
 #include "os.h"
 #include "io.h"
 
+using namespace std;
 
 namespace silent {
 
 template<class _ConnectionType, class _HandlerType=Handler<_ConnectionType> >
 class Acceptor {
-	typedef  _ConnectionType	ConnectionType;
-	typedef  _HandlerType		HandlerType;
+	typedef _ConnectionType	ConnectionType;
+	typedef _HandlerType	HandlerType;
+
+	typedef std::vector<ConnectionType*> Connections;
 
 public:
 	Acceptor(HandlerType& _handler)
-		: handler(_handler),epoll_fd(INVALID_HANDLE),listener(INVALID_SOCKET),epoll_size(50000) {
+		: handler(_handler),reactor(INVALID_HANDLE),listener(INVALID_SOCKET),
+			concurrentConnections(50000),backlog(128) {
+		epollEvents.reserve (128);
+
 	}
-	
+
 	~Acceptor() {
 		destroy();
 	}
-	
-	// both are host byte order.
-	bool start(uint32_t address, uint16_t port, int backlog=128) {
-		if (listener > 0)	//already bind
-			return false;
 
-		bool result = bind_internal(address, port, backlog);
-		if (!result) {
-			close_FDs();
-		}
-		return result;
-	}
-	
+	// both are host byte order.
+	bool start(uint32_t address, uint16_t port);
+
+	int wait(Connections& opened,
+			 Connections& received,
+			 Connections& sent,
+			 Connections& closed,
+			 int timeout);
 
 	HandlerType setHandler(HandlerType& handler) {
 		this->handler = handler;
 	}
 
-	int getEpollSize() {
-		return this->epoll_size;
+	int getConcurrentConnections() {
+		return this->concurrentConnections;
 	}
 
-	bool setEpollSize(int size) {
-		
+	bool setConcurrentConnections(int size) {
+		if (!isValidHandle(reactor)) {
+			if (size > 0) {
+				this->concurrentConnections = size;
+				return true;
+			}
+		}
+		return false;
 	}
+
+	int getConcurrentThreads() {
+		return this->concurrentConnections;
+	}
+
+	bool setConcurrentThreads(int size) {
+		if (!isValidHandle(reactor)) {
+			if (size > 0) {
+				this->concurrentConnections = size;
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 
 protected:
 
@@ -65,27 +92,25 @@ protected:
 	}
 
 private:
-	HandlerType& handler;
 
-	handle_t epoll_fd;	
-	socket_t listener;	
+	bool isRunning() {
+		return isBinding() && isReactorCreated();
+	}
 
-	int epoll_size;	// first parameter of epoll_create function
-
-	
 	bool isBinding() {
 		return isValidSocket(listener);
 	}
-	bool isEpollCreated() {
-		return isValidHandle(epoll_fd);
+
+	bool isReactorCreated() {
+		return isValidHandle(reactor);
 	}
-	
-	void close_FDs () {
+
+	void closeHandles () {
 		if (isValidSocket(listener)) {
-			close(listener);listener = 0;
+			closeHandle(listener);listener = INVALID_SOCKET;
 		}
-		if (epoll_fd > 0) {
-			close(epoll_fd); epoll_fd = 0;
+		if (isValidHandle(reactor)) {
+			closeHandle(reactor); reactor = INVALID_HANDLE;
 		}
 	}
 
@@ -106,7 +131,7 @@ private:
 			printf ("Can NOT bind port %d \n", port);
 			return false;
 		}
-	
+
 		if ( error=::listen(listener, backlog) < 0) {
 			printf ("Can NOT listen socket. backlog=%d \n", backlog);
 			return false;
@@ -114,38 +139,51 @@ private:
 
 		error = set_nonblocking(listener);
 		if (error < 0) {
-			puts ("Can NOT configure listening socket");
+			puts ("Can NOT set listening socket to nonblocking");
 			return false;
 		}
 
 		return true;
 	}
-	
-	bool epoll_init() {
-		if (isEpollCreated())
-			return true;
-		
-		epoll_fd = epoll_create(epoll_size);
-		if (isValidHandle(epoll_fd)) {
-			
-		}
 
-		return true;
-	}
-	
-	
+
+
 
 	void destroy() {
-		close_FDs();
+		closeHandles();
 	}
 
 
+	/**
+		以下成员实现在别的文件, 不同平台是不一样的.
+		因此放在后面包含进来
+	*/
+	bool createReactor();
+	bool addListenerToReactor();
+	void growEpollEventSize();
 
+private:
+	HandlerType& handler;
+
+	handle_t reactor;
+	socket_t listener;
+	int backlog;
+	int concurrentConnections;
+	int concurrentThreads;
+
+	typedef std::vector<epoll_event> EpollEvents;
+
+	EpollEvents epollEvents;
 };
 
 
 }	// namespace silent;
 
+#if defined(__linux__)
+	#include "acceptor_linux.h"
+#elif defined(_WIN32)
+	#include "acceptor_win32.h"
 #endif
 
 
+#endif // _SILENT_ACCEPTOR_H_

@@ -7,8 +7,8 @@
 namespace silent {
 
 /**
-	ÊµÏÖ c++ ±ê×¼¹æ¶¨µÄ allocator ÏàÓ¦µÄ½Ó¿Ú.
-	ÏêÇé²Î¿¼ stl Ô´ÂëÆÊÎö. ²¿·Ö
+	å®žçŽ° c++ æ ‡å‡†è§„å®šçš„ allocator ç›¸åº”çš„æŽ¥å£.
+	è¯¦æƒ…å‚è€ƒ stl æºç å‰–æž. éƒ¨åˆ†
 */
 
 template<typename T>
@@ -26,11 +26,11 @@ public:
 		typedef Allocator<T1> other;
 	};
 
-	Allocator() {}		//Ä¬ÈÏ¹¹Ôì
-	Allocator(const Allocator&) {}	//¿½±´¹¹Ôì
+	Allocator() {}					//é»˜è®¤æž„é€ 
+	Allocator(const Allocator&) {}	//æ‹·è´æž„é€ 
 
 	template <class T1> 
-	Allocator(const Allocator<T1>&) {} //ÆäËûAllocator<Tother>µÄ¹¹Ôì
+	Allocator(const Allocator<T1>&) {} //å…¶ä»–Allocator<Tother>çš„æž„é€ 
 
 	~Allocator() {}
 

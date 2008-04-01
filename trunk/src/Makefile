@@ -35,7 +35,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = xf$(EXEEXT)
+bin_PROGRAMS = silentweb$(EXEEXT)
 subdir = src
 DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -49,10 +49,10 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_xf_OBJECTS = mempool.$(OBJEXT) server.$(OBJEXT) \
+am_silentweb_OBJECTS = mempool.$(OBJEXT) server.$(OBJEXT) \
 	socket_control.$(OBJEXT)
-xf_OBJECTS = $(am_xf_OBJECTS)
-xf_LDADD = $(LDADD)
+silentweb_OBJECTS = $(am_silentweb_OBJECTS)
+silentweb_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -61,8 +61,8 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-SOURCES = $(xf_SOURCES)
-DIST_SOURCES = $(xf_SOURCES)
+SOURCES = $(silentweb_SOURCES)
+DIST_SOURCES = $(silentweb_SOURCES)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
@@ -151,7 +151,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target_alias = 
-xf_SOURCES = mempool.cpp server.cpp socket_control.cpp 
+silentweb_SOURCES = mempool.cpp server.cpp socket_control.cpp
 noinst_HEADERS = 
 all: all-am
 
@@ -209,9 +209,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
-xf$(EXEEXT): $(xf_OBJECTS) $(xf_DEPENDENCIES) 
-	@rm -f xf$(EXEEXT)
-	$(CXXLINK) $(xf_LDFLAGS) $(xf_OBJECTS) $(xf_LDADD) $(LIBS)
+silentweb$(EXEEXT): $(silentweb_OBJECTS) $(silentweb_DEPENDENCIES) 
+	@rm -f silentweb$(EXEEXT)
+	$(CXXLINK) $(silentweb_LDFLAGS) $(silentweb_OBJECTS) $(silentweb_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -404,11 +404,12 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS uninstall-info-am
 
-	allocator.h 
-	mempool.h vhost.h server.h server_config.h 
+	allocator.h
+	mempool.h vhost.h server.h server_config.h
 	acceptor.h connection.h handler.h
 	http_connection.h http_handler.h
 	io.h os.h io_win32.h io_linux_sys_epoll.h
+	acceptor.h
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
