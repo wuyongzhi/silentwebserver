@@ -30,16 +30,21 @@ int main() {
 	g_config.address = 0;
 	g_config.backlog = 128;
 	
+	typedef Acceptor<HttpConnection, Handler<HttpConnection> > HttpAcceptor;
+
 	Handler<HttpConnection> handler;
+	HttpAcceptor acceptor(handler);
 
-	Acceptor<HttpConnection, Handler<HttpConnection> > acceptor(handler);
+	if (acceptor.bind(g_config.address,g_config.port)) {
 
-	if (acceptor.start(g_config.address,g_config.port)) {
 		printf ("%s is running at %d port\n", PACKAGE_STRING, g_config.port);
+
+		acceptor.start();
 	}
+	
+	
 
-
-	mainloop(g_server, g_config);
+	//mainloop(g_server, g_config);
 
 	return 0;
 }

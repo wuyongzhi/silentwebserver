@@ -1,7 +1,7 @@
 #ifndef _SILENT_CONNECTION_H_
 #define _SILENT_CONNECTION_H_	1
 
-
+#include "os.h"
 
 
 namespace silent {
@@ -14,8 +14,7 @@ namespace silent {
 class Connection {
 	
 private: 
-	int fd;				//sock 描述符
-	int write_queue;	//数据输出队列..
+	socket_t sock_fd;			//sock 描述符
 	
 	 
 	

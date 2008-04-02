@@ -1,7 +1,7 @@
 #ifndef _SILENT_OS_H_
 #define _SILENT_OS_H_	1
 
-namespace silent {
+
 
 #if defined(_WIN32)		/* win32 */
 
@@ -61,8 +61,5 @@ namespace silent {
 
 #endif 
 
-
-
-}
 
 #endif
