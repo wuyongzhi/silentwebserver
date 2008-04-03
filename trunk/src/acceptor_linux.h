@@ -114,6 +114,7 @@ int Acceptor<C,H>::wait(Connections& opened,
 						}
 
 					} else {
+
 						// “Ï≤Ω accept ¥ÌŒÛ¥¶¿Ì
 						if (errno == EAGAIN) {
 							break;

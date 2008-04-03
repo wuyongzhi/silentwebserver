@@ -12,12 +12,9 @@ namespace silent {
  *
  */
 class Connection {
-	
+
 private: 
 	socket_t sock_fd;			//sock 描述符
-	
-	 
-	
 	
 protected:
 	
@@ -26,9 +23,7 @@ protected:
 	~Connection() {
 	}
 	
-	
 template<class,class> friend class Acceptor;	//acceptor 可访问 connection 的所有成员
-	
 	
 };
 
