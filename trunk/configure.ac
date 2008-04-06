@@ -5,6 +5,8 @@
 	AC_PROG_CXX
 	CXXFLAGS="-g3 -ggdb -O0"
 
+	dnl CXXFLAGS="-O3"
+
 	AC_CHECK_HEADERS([sys/epoll.h])
 
 	AC_CONFIG_HEADERS([config.h])
@@ -13,5 +15,6 @@
 			src/Makefile
 			study/Makefile
 			study/epoll/Makefile
+			study/performance/Makefile
 			])
 	AC_OUTPUT

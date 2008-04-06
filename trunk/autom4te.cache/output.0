@@ -2981,6 +2981,7 @@ fi
 
 	CXXFLAGS="-g3 -ggdb -O0"
 
+	
 	ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -4551,7 +4552,7 @@ done
 
 	ac_config_headers="$ac_config_headers config.h"
 
-	ac_config_files="$ac_config_files Makefile src/Makefile study/Makefile study/epoll/Makefile"
+	ac_config_files="$ac_config_files Makefile src/Makefile study/Makefile study/epoll/Makefile study/performance/Makefile"
 
 	cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5142,6 +5143,7 @@ do
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "study/Makefile") CONFIG_FILES="$CONFIG_FILES study/Makefile" ;;
     "study/epoll/Makefile") CONFIG_FILES="$CONFIG_FILES study/epoll/Makefile" ;;
+    "study/performance/Makefile") CONFIG_FILES="$CONFIG_FILES study/performance/Makefile" ;;
 
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}

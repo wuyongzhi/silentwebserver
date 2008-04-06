@@ -404,7 +404,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS uninstall-info-am
 
-	allocator.h
+	allocator.h stl_allocator_impl.h 
 	mempool.h vhost.h server.h server_config.h
 	acceptor.h connection.h handler.h
 	http_connection.h http_handler.h

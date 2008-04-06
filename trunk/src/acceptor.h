@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include "allocator.h"
 #include "socket_control.h"
 #include "handler.h"
 #include "os.h"

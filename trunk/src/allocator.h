@@ -1,82 +1,30 @@
 #ifndef _SILENT_ALLOCATOR_H_
-#define _SILENT_ALLOCATOR_H_	1
+#define _SILENT_ALLOCATOR_H_
 
-#include <new>	/* for placement new operator */
-
+#include <cstddef>
 
 namespace silent {
-
-/**
-	实现 c++ 标准规定的 allocator 相应的接口.
-	详情参考 stl 源码剖析. 部分
-*/
-
-template<typename T>
-class Allocator{
+	
+template <std::size_t block_size, std::size_t chunk_size>
+class FixedAllocator {
 public:
-	typedef size_t		size_type;
-	typedef ptrdiff_t	difference_type;
-	typedef T*			pointer;
-	typedef const T*	const_pointer;
-	typedef T&			reference;
-	typedef const T&	const_reference;
-	typedef T			value_type;
-
-	template <typename T1> struct rebind {
-		typedef Allocator<T1> other;
-	};
-
-	Allocator() {}					//默认构造
-	Allocator(const Allocator&) {}	//拷贝构造
-
-	template <class T1> 
-	Allocator(const Allocator<T1>&) {} //其他Allocator<Tother>的构造
-
-	~Allocator() {}
-
-	pointer address(reference r) const { 
-		return &r; 
+	typedef std::size_t size_type;
+	size_type getBlockSize() const {
+		return block_size;
 	}
 
-	const_pointer address(const_reference r) const { 
-		return &r; 
+	size_type getChunkSize() const {
+		return chunk_size;
 	}
 	
-	T* allocate(size_type n, const void* = 0) {
-		return n != 0 ? static_cast<T*>(::operator new(_Alloc::allocate(n * sizeof(T)))) 
-					: 0;
-	}
-
-
-	void deallocate(pointer p, size_type n) { 
-		::operator delete(p); 
-	}
-
-	size_type max_size() const { 
-		return size_t(-1) / sizeof(T); 
-	}
-
-	void construct(pointer p, const T& v) { 
-		new(__p) _Tp(v); 
+	bool canAllocateOrdered() const {
+		return false;
 	}
 	
-	void destroy(pointer p) { 
-		p->~T(); 
-	}
-	
+
 };
 
 
-} /* namespace silent */
+}
 
-
-
-
-
-
-
-#endif	/* defined _SILENT_ALLOCATOR_H_ */
-
-
-
-
+#endif

@@ -12,10 +12,10 @@
 
 
 int main() {
-
+	sleep(1);
 	using namespace std;
 	const unsigned short PORT = 8089;
-	const unsigned int BUF_SIZE = 1024 * 70;
+	const unsigned int BUF_SIZE = 1024 * 190;
 
 	int s = socket(AF_INET,SOCK_STREAM, 0);
 
@@ -64,7 +64,7 @@ int main() {
 	int size, result;
 	socklen_t socklen=sizeof(size);
 	size = 1024 * 1;
-	setsockopt(c2, SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
+	//setsockopt(c2, SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
 
 	result = getsockopt(c2, SOL_SOCKET, SO_RCVBUF, &size, &socklen);
 	cout << "server: recv buffer size=" << size << endl;

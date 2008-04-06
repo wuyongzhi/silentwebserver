@@ -3,11 +3,16 @@
 
 
 #include <list>
+#include <vector>
 
 
 namespace silent {
 
-class Buffer {
+/**
+	
+*/
+
+public Buffer {
 public:
 	typedef size_t size_type;
 
@@ -15,9 +20,15 @@ public:
 	char *		buf;
 };
 
+
+
 class Package {
+
 public:
-	typedef std::list<Buffer*> Buffers;
+	typedef std::vector<Buffer*> Buffers;
+	typedef Buffer::size_type size_type;
+	
+	size_type 
 
 	Buffers* bufs;
 };

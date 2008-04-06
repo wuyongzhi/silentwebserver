@@ -150,7 +150,7 @@ bool Acceptor<C,H>::initSocket(socket_t sock_fd, ConnectionType* c) {
 
 
 template<class C, class H> 
-void Acceptor<C,H>::processClient(int events, ConnectionType *c) {
+void Acceptor<C,H>::processClient(ConnectionType *c) {
 	
 
 	
