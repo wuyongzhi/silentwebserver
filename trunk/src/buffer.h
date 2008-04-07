@@ -17,8 +17,13 @@ public:
 	typedef std::size_t size_type;
 
 public:
-	Buffer(char* _buf, size_type _size) :buf(_buf),size(_size) {
+	Buffer(Buffer& other) {
+		this->size = other.size;
+		this->buf = other.buf;
 	}
+
+	Buffer(char* _buf, size_type _size) :buf(_buf),size(_size)
+	{}
 	
 	char* buffer() {
 		return buf;
@@ -33,7 +38,7 @@ public:
 	}
 
 private:
-	size_type	size;	
+	size_type	size;
 	char*		buf;
 
 private:
@@ -45,12 +50,11 @@ private:
 class Package {
 
 public:
-	typedef std::vector<Buffer*> Buffers;
+	typedef std::vector<Buffer> Buffers;
 	typedef Buffer::size_type size_type;
 	
 
 public:
-	public 
 	size_type size() const {
 		return size;
 	}
@@ -63,11 +67,14 @@ public:
 		return bufs;
 	}
 
+	const Buffers& buffers() const {
+		return bufs;
+	}
+
 private:
 	size_type capacity;		/* 此包的容量 */
 	size_type size;			/* 描述数据包的长度．这个长度不是容量的长度．而是实际数据的长度 */
 	Buffers  bufs;
-
 };
 
 
