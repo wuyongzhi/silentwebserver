@@ -152,7 +152,7 @@ private:
 		}
 
 		err = set_nonblocking(listener);
-		if (err < 0) {
+		if (err != 0) {
 			puts ("Can NOT set listening socket to nonblocking");
 			return false;
 		}

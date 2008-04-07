@@ -12,12 +12,32 @@ namespace silent {
 	
 */
 
-public Buffer {
+class Buffer {
 public:
-	typedef size_t size_type;
+	typedef std::size_t size_type;
 
-	size_type	len;
-	char *		buf;
+public:
+	Buffer(char* _buf, size_type _size) :buf(_buf),size(_size) {
+	}
+	
+	char* buffer() {
+		return buf;
+	}
+	
+	const char* buffer() const {
+		return buf;
+	}
+
+	size_type size() const {
+		return size;
+	}
+
+private:
+	size_type	size;	
+	char*		buf;
+
+private:
+	Buffer() {}
 };
 
 
@@ -28,9 +48,26 @@ public:
 	typedef std::vector<Buffer*> Buffers;
 	typedef Buffer::size_type size_type;
 	
-	size_type 
 
-	Buffers* bufs;
+public:
+	public 
+	size_type size() const {
+		return size;
+	}
+
+	size_type capacity() const {
+		return capacity;
+	}
+
+	Buffers& buffers() {
+		return bufs;
+	}
+
+private:
+	size_type capacity;		/* 此包的容量 */
+	size_type size;			/* 描述数据包的长度．这个长度不是容量的长度．而是实际数据的长度 */
+	Buffers  bufs;
+
 };
 
 
