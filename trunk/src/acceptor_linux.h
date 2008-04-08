@@ -85,11 +85,18 @@ int Acceptor<C,H>::wait(Connections& opened,
 				ConnectionType* c = reinterpret_cast<ConnectionType*>(e.data.ptr);
 				if (e.events | EPOLLIN) {
 					// 读取数据.
+					char buf[1024];
+					int readlen = read(c->sock_fd, buf, 1023);
+					if (readlen > 0) {
+						cout << "recved " << readlen << "bytes" << endl;
+						buf[readlen] = '\0';
+						cout << buf << endl;
+					}
 				} else if (e.events | EPOLLOUT) {
 					// 写数据
 
-				} else { // err 什么的
-					//
+				} else if (e.events | (EPOLLERR|EPOLLHUP) { // err 什么的
+					
 				}
 				
 

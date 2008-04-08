@@ -46,13 +46,55 @@ private:
 };
 
 
-
 class Package {
 
 public:
-	typedef std::vector<Buffer> Buffers;
 	typedef Buffer::size_type size_type;
-	
+
+	typedef std::vector<Buffer> Buffers;
+	//typedef Buffers::iterator iterator_type;
+
+	class PackagePointer {
+
+		PackagePointer(Buffers& bufs, Buffer& buf, int offset) {
+			this->buf = buf;
+			this->pos = pos;
+		}
+
+	public:
+		size_type size() {
+			return buf.size;
+		}
+
+		char* buf() {
+			return buf.buf;
+		}	
+		
+		Buffer& buffer() {
+			return buf;
+		}
+
+		size_type pos() {
+			return pos;
+		}
+		
+		PackagePointer& next() {
+			return *this;
+		}
+
+		void add(size_type size) {
+			pos += size;
+			if (pos >= buf.size) {
+			}
+		}
+	private:
+
+		Buffers& bufs; 
+		Buffer& buf;
+		char* end;
+		size_type pos;	/* 从 0 开始算起 */
+	};
+
 
 public:
 	size_type size() const {
@@ -70,6 +112,17 @@ public:
 	const Buffers& buffers() const {
 		return bufs;
 	}
+	
+	/**
+		分配一个Buffer
+	*/
+	Buffer& allocate() {
+		
+	}
+
+	Buffer& current() {
+		
+	}
 
 private:
 	size_type capacity;		/* 此包的容量 */
@@ -77,6 +130,19 @@ private:
 	Buffers  bufs;
 };
 
+
+class ReadPackage : public Package {
+public:
+	const unsigned char readCount() const {
+		return readCount;
+	}
+	
+
+private:
+	unsigned char readCount;
+
+friend template<class,class> Acceptor;
+};
 
 
 }
