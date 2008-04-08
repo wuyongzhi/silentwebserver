@@ -3,6 +3,8 @@
 
 
 namespace silent {
+
+template<class Alloc=
 class Base {
 
 	/*static*/ void* operator new(size_t size) {
@@ -12,7 +14,11 @@ class Base {
 	/*static*/ void operator delete(void *pmem, size_t size) {
 		::operator delete(pmem);
 	}
+
+private:
+		
 };
+
 }
 
 

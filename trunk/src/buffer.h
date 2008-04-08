@@ -97,6 +97,11 @@ public:
 
 
 public:
+
+	Package() : 
+		capacity(0),size(0) {
+	}
+
 	size_type size() const {
 		return size;
 	}
@@ -116,13 +121,12 @@ public:
 	/**
 		分配一个Buffer
 	*/
-	Buffer& allocate() {
+	void allocate() {
 		
 	}
-
-	Buffer& current() {
-		
-	}
+	
+	
+	
 
 private:
 	size_type capacity;		/* 此包的容量 */
