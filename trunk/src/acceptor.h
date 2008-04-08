@@ -6,12 +6,14 @@
 
 */
 
-
+#include <errno.h>
+#include <string.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/socket.h>
+#include <sys/uio.h>
 #include <netinet/in.h>
 
 #include <cerrno>
@@ -27,6 +29,7 @@
 #include "handler.h"
 #include "os.h"
 #include "io.h"
+
 
 using namespace std;
 

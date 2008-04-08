@@ -83,19 +83,35 @@ int Acceptor<C,H>::wait(Connections& opened,
 					3、对象、内存的创建分配，销毁释放。（加速对象、内存的创建分配）
 				*/
 				ConnectionType* c = reinterpret_cast<ConnectionType*>(e.data.ptr);
-				if (e.events | EPOLLIN) {
+				if (e.events & EPOLLIN) {
+					/*
+ 44 struct iovec
+ 45   {
+ 46     void *iov_base;  Pointer to data.  
+ 47     size_t iov_len;  Length of data.  
+ 48   };
+					*
+					*/
 					// 读取数据.
 					char buf[1024];
-					int readlen = read(c->sock_fd, buf, 1023);
+					iovec v;
+					v.iov_base = buf;
+					v.iov_len = 1023;
+					int readlen = readv(c->sock_fd, &v, 1);
 					if (readlen > 0) {
 						cout << "recved " << readlen << "bytes" << endl;
 						buf[readlen] = '\0';
 						cout << buf << endl;
+					} else {
+						int e = errno;
+						cout << "readv error" << endl;
+						cout << e << endl;
+						cout << strerror(e) << endl;
 					}
-				} else if (e.events | EPOLLOUT) {
+				} else if (e.events & EPOLLOUT) {
 					// 写数据
 
-				} else if (e.events | (EPOLLERR|EPOLLHUP) { // err 什么的
+				} else if (e.events & (EPOLLERR|EPOLLHUP)) { // err 什么的
 					
 				}
 				
