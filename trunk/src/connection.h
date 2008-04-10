@@ -21,6 +21,7 @@ protected:
 	Connection() {
 	}
 	~Connection() {
+		closeSocket(sock_fd);
 	}
 	
 template<class,class> friend class Acceptor;	//acceptor 可访问 connection 的所有成员

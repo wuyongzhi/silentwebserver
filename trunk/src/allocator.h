@@ -7,6 +7,7 @@
 #include <vector>
 #include <cassert>
 
+#include <http_connection.h>
 //#include "buffer.h"
 
 namespace silent {
@@ -96,6 +97,9 @@ private:
 	std::vector<ChunkNode*> chunks;
 	FreeBlock* freeList;
 };
+
+
+typedef FixedAllocator<sizeof(HttpConnection), 32> HttpConnectionAllocator;
 
 
 }

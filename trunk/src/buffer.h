@@ -12,9 +12,34 @@ namespace silent {
 	
 */
 
-class Buffer {
+#if defined(__linux__)
+
+/* linux */
+class Buffer : protected iovec {
 public:
-	typedef std::size_t size_type;
+	typedef size_t size_type;
+	typedef void*  buffer_type;
+	typedef const void*  const_buffer_type;
+
+public:
+	buffer_type buffer() { return iov_base; }
+	const_buffer_type buffer() const { return iov_base; }
+	size_type size() const { return iov_len; }
+
+#elif defined(_WIN32) 
+
+/* win32 */
+class Buffer : protected WSABUF {
+public:
+	typedef u_long		size_type;
+	typedef char FAR *	buffer_type;
+	typedef const char FAR * const_buffer_type;
+
+public:
+	buffer_type buffer() { return buf; }
+	const_buffer_type buffer() const { return buf; }
+	size_type size() const { return len; }
+#endif
 
 public:
 	Buffer(Buffer& other) {
@@ -25,11 +50,11 @@ public:
 	Buffer(char* _buf, size_type _size) :buf(_buf),size(_size)
 	{}
 	
-	char* buffer() {
+	buffer_type buffer() {
 		return buf;
 	}
 	
-	const char* buffer() const {
+	const_buffer_type buffer() const {
 		return buf;
 	}
 
@@ -38,12 +63,10 @@ public:
 	}
 
 private:
-	size_type	size;
-	char*		buf;
-
-private:
 	Buffer() {}
 };
+
+
 
 
 class Package {

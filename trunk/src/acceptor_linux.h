@@ -54,6 +54,7 @@ int Acceptor<C,H>::wait(Connections& opened,
 						Connections& sent,
 						Connections& closed,
 						int timeout) {
+	HttpConnectionAllocator connection_allocator;
 
 	lastActivelyConnections = 
 		epoll_wait(reactor, &epollEvents[0], epollEvents.size(), timeout);
@@ -127,13 +128,13 @@ int Acceptor<C,H>::wait(Connections& opened,
 
 					if (isValidSocket(sock_fd)) {
 						
-						ConnectionType* c = new ConnectionType;
-							
-						if (initSocket(sock_fd, c)) {
+						ConnectionType* c = new(connection_allocator) ConnectionType;
+						
+						if (initSocket(sock_fd, c) == 0) {
 							opened.push_back(c);
 						} else {
-							delete (c);
-							closeSocket(sock_fd);
+							c->~ConnectionType();
+							connection_allocator.deallocate(c);
 						}
 
 					} else {
@@ -158,7 +159,7 @@ int Acceptor<C,H>::wait(Connections& opened,
 //using template<class C,class H>Acceptor<C,H>::ConnectionPointer;
 
 template<class C, class H> 
-bool Acceptor<C,H>::initSocket(socket_t sock_fd, ConnectionType* c) {
+int Acceptor<C,H>::initSocket(socket_t sock_fd, ConnectionType* c) {
 
 	set_nonblocking(sock_fd);
 
@@ -168,7 +169,7 @@ bool Acceptor<C,H>::initSocket(socket_t sock_fd, ConnectionType* c) {
 	e.events = EPOLL_ALL_EVENTS | EPOLLET;
 	e.data.ptr = c;
 	
-	return (epoll_ctl (reactor, EPOLL_CTL_ADD, sock_fd, &e) == 0);
+	epoll_ctl (reactor, EPOLL_CTL_ADD, sock_fd, &e);
 }
 
 
