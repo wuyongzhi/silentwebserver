@@ -10,8 +10,6 @@
 
 namespace silent {
 
-
-
 template<class C, class H>
 bool Acceptor<C,H>::createReactor() {
 	reactor = epoll_create(concurrentConnections + 1);
@@ -169,7 +167,7 @@ int Acceptor<C,H>::initSocket(socket_t sock_fd, ConnectionType* c) {
 	e.events = EPOLL_ALL_EVENTS | EPOLLET;
 	e.data.ptr = c;
 	
-	epoll_ctl (reactor, EPOLL_CTL_ADD, sock_fd, &e);
+	return epoll_ctl (reactor, EPOLL_CTL_ADD, sock_fd, &e);
 }
 
 

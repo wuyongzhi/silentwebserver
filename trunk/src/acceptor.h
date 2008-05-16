@@ -174,7 +174,7 @@ private:
 		以下成员实现在别的文件, 不同平台是不一样的.
 		因此放在后面包含进来
 	*/
-	bool initSocket(socket_t,ConnectionType*);
+	int initSocket(socket_t,ConnectionType*);
 	bool createReactor();
 	bool addListenerToReactor();
 	void growEpollEventSize();
