@@ -1,1 +1,0 @@
-SUBDIRS=asm epoll performance
